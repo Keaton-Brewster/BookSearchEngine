@@ -4,12 +4,15 @@ const router = require("./api");
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const app = express();
 const server = http.createServer(app);
 const io = require("socket.io")(server);
 
 const PORT = process.env.PORT || 3001;
+
+const db = require("../models");
 
 let interval;
 
@@ -33,6 +36,13 @@ const getApiAndEmit = (socket) => {
 
 app.use(cors());
 app.use(router);
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1/database", {
+  useNewUrlParser: true,
+  useFindAndModify: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
 
 server.listen(PORT, () => {
   console.info("socket online");

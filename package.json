@@ -9,6 +9,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
+    "mongoose": "^5.12.7",
     "socket.io": "^4.0.1"
   },
   "devDependencies": {
@@ -24,6 +25,6 @@
     "build": "cd client && yarn run build",
     "heroku-postbuild": "yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js"
+    "server": "nodemon server/index.js"
   }
 }

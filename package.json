@@ -1,0 +1,12 @@
+{
+  "name": "book-search-engine",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Keaton-Brewster/BookSearchEngine.git",
+  "author": "Keaton-Brewster <keaton.brewster@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "cd ../client && yarn run build",
+    "install": "cd client && yarn install && cd ../server && yarn install"
+  }
+}

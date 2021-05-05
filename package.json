@@ -20,7 +20,7 @@
     "start:prod": "node server/server.js",
     "start:dev": "concurrently \"nodemon server/index.js\" \"yarn run client\"",
     "client": "cd client && yarn run start",
-    "install": "yarn install && cd client && yarn install",
+    "install": "cd client && yarn install",
     "build": "cd client && yarn run build",
     "heroku-postbuild": "yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server/server.js",
+    "start:prod": "node server/index.js",
     "start:dev": "concurrently \"nodemon server/index.js\" \"yarn run client\"",
     "client": "cd client && yarn run start",
     "install": "cd client && yarn install",

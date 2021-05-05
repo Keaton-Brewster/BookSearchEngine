@@ -10,7 +10,7 @@
     "install": "cd client && yarn install && cd ../server && yarn install"
   },
   "engines": {
-    "node": "v16.1.0",
-    "yarn": "1.22.10"
+    "node": "v16.x",
+    "yarn": "1.x"
   }
 }

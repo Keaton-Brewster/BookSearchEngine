@@ -8,5 +8,9 @@
   "scripts": {
     "build": "cd ../client && yarn run build",
     "install": "cd client && yarn install && cd ../server && yarn install"
+  },
+  "engines": {
+    "node": "v16.1.0",
+    "yarn": "1.22.10"
   }
 }

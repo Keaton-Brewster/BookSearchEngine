@@ -1,16 +1,28 @@
 {
-  "name": "book-search-engine",
+  "name": "google-book-search",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/Keaton-Brewster/BookSearchEngine.git",
-  "author": "Keaton-Brewster <keaton.brewster@gmail.com>",
+  "main": "server.js",
+  "repository": "https://github.com/Keaton-Brewster/BookSearchEngine",
+  "author": "Keaton Brewster",
   "license": "MIT",
-  "scripts": {
-    "build": "cd ../client && yarn run build",
-    "install": "cd client && yarn install && cd ../server && yarn install"
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^4.0.1"
   },
-  "engines": {
-    "node": "v16.x",
-    "yarn": "1.x"
+  "devDependencies": {
+    "concurrently": "^6.0.2",
+    "if-env": "^1.0.4",
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon server.js\" \"yarn run client\"",
+    "client": "cd client && yarn run start",
+    "build": "cd client && yarn run build",
+    "heroku-postbuild": "yarn run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js"
   }
 }

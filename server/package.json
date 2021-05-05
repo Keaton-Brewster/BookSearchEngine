@@ -1,12 +1,14 @@
 {
-  "name": "GoogleBookSearch",
+  "name": "google-book-search",
   "version": "1.0.0",
   "main": "server.js",
   "repository": "https://github.com/Keaton-Brewster/BookSearchEngine",
   "author": "Keaton Brewster",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^4.0.1"
   },
   "devDependencies": {
     "concurrently": "^6.0.2",
@@ -18,10 +20,9 @@
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon server.js\" \"yarn run client\"",
     "client": "cd ../client && yarn run start",
-    "install": "cd client && yarn install",
-    "build": "cd client && yarn run build",
+    "build": "cd ../client && yarn run build",
     "heroku-postbuild": "yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server/index.js"
+    "server": "nodemon server.js"
   }
 }

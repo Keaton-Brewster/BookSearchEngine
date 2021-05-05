@@ -1,11 +1,12 @@
 const path = require("path");
+const router = require("express").Router();
 
-module.exports = (app) => {
-//   app.get("*", (request, response) => {
-//     response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-//   });
+router.get("*", (request, response) => {
+  response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+});
 
-  app.get("/api/hello", (req, res) => {
-    res.json("hello!");
-  });
-};
+router.get("/api", (req, res) => {
+  res.send({ response: "I am alive" }).status(200);
+});
+
+module.exports = router;

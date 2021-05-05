@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Search from "./pages/Search";
-// import Saved from "./pages/Saved";
+import Search from "./pages/Search";
+import Saved from "./pages/Saved";
+import Navbar from "./components/Navbar";
 import openSocket from "socket.io-client";
+import "rsuite/dist/styles/rsuite-dark.css";
 import "./assets/App.css";
 
-import Books from "./pages/Books";
+import Books from "./pages/Search";
 
 function App() {
-  const [response, setResponse] = useState();
+  const [time, setTime] = useState();
 
   useEffect(() => {
     const socket = openSocket();
     // const socket = io();
     socket.on("FromAPI", (data) => {
-      setResponse(data);
+      setTime(data);
     });
 
     return () => {
@@ -24,15 +26,12 @@ function App() {
 
   return (
     <Router>
+      <Navbar time={time} />
       <Switch>
-        <Route path="/" component={Books} />
-        {/* <Route exact path="/" component={Search} />
+        <Route exact path="/" component={Search} />
         <Route exact path="/search" component={Search} />
-        <Route exact path="/saved" component={Saved} /> */}
+        <Route exact path="/saved" component={Saved} />
       </Switch>
-      <p>
-        It's <time dateTime={response}>{response}</time>
-      </p>
     </Router>
   );
 }

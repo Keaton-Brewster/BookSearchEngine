@@ -1,5 +1,6 @@
+require("dotenv").config();
 // For routing
-const router = require("./api");
+const router = require("./routing");
 
 const express = require("express");
 const http = require("http");
@@ -37,13 +38,19 @@ const getApiAndEmit = (socket) => {
 app.use(cors());
 app.use(router);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1/database", {
-  useNewUrlParser: true,
-  useFindAndModify: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://127.0.0.1/database",
+  {
+    useNewUrlParser: true,
+    useFindAndModify: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.info('MongoDB Atlas Connected');
+  }
+);
 
 server.listen(PORT, () => {
-  console.info("socket online");
+  console.info("Socket Online");
 });

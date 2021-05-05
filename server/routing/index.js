@@ -10,7 +10,7 @@ router.use("/books", bookRoutes);
 
 // If no API routes are hit, send the React app
 router.get("*", (request, response) => {
-  response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+  response.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
 });
 
 module.exports = router;

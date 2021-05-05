@@ -1,12 +1,18 @@
 const path = require("path");
 const router = require("express").Router();
+const db = require("../../models");
 
-router.get("*", (request, response) => {
-  response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-});
+router.post("/books", (request, response) => {
+  const book = request.body;
 
-router.get("/api", (req, res) => {
-  res.send({ response: "I am alive" }).status(200);
+  try {
+    db.Book.create(book).then((res) => {
+      response.send(res).status(200);
+    });
+  } catch (error) {
+    response.sendStatus(400);
+    throw new Error(error);
+  }
 });
 
 module.exports = router;

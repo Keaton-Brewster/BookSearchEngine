@@ -7,14 +7,11 @@ import openSocket from "socket.io-client";
 import "rsuite/dist/styles/rsuite-dark.css";
 import "./assets/App.css";
 
-import Books from "./pages/Search";
-
 function App() {
   const [time, setTime] = useState();
 
   useEffect(() => {
-    const socket = openSocket();
-    // const socket = io();
+    const socket = openSocket("http://localhost:3000");
     socket.on("FromAPI", (data) => {
       setTime(data);
     });

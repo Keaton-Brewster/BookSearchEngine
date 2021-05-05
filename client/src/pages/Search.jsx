@@ -41,7 +41,7 @@ function Books() {
         <Col size="md-2" />
         <Col size="md-8">
           <h1>Search!</h1>
-          <form>
+          <form onSubmit={(event) => event.preventDefault()}>
             <Input
               type="text"
               name="search"

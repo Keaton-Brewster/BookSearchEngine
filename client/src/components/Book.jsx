@@ -1,14 +1,23 @@
 import React from "react";
-import { Container, Content, Sidebar } from "rsuite";
+import { Container, Content, Sidebar, Footer } from "rsuite";
 
-const Book = ({ imgLink, authors, categories }) => {
+const Book = ({ imgLink, authors, categories, description }) => {
   return (
     <Container>
       <Sidebar>
         <img src={imgLink} alt="" />
       </Sidebar>
-      <Content>Author: {authors}</Content>
-      <Content>Categories: {categories}</Content>
+      <Container>
+        <Content>
+          Author: <strong>{authors}</strong>
+        </Content>
+        <Content>
+          Categories: <strong>{categories}</strong>
+        </Content>
+        <Footer>
+          Description <strong>{description}</strong>
+        </Footer>
+      </Container>
     </Container>
   );
 };

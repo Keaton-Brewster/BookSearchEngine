@@ -1,4 +1,4 @@
-import { Container, Content, PanelGroup, Panel } from "rsuite";
+import { Container, Content, PanelGroup, Panel, Alert } from "rsuite";
 import Book from "./Book";
 import SaveButton from "./SaveButton";
 import API from "../utils/API";
@@ -15,15 +15,20 @@ const SearchResults = ({ books }) => {
 
     console.log(bookData);
 
-    API.saveBook(bookData).catch((error) => {
-      console.error(`error api.save book ${error}`);
-    });
+    API.saveBook(bookData)
+      .then(() => {
+        Alert.success("Saved!");
+      })
+      .catch((error) => {
+        Alert.error("Oops. something went wrong...");
+        console.error(`error api.save book ${error}`);
+      });
   }
 
   return (
     <Container>
       <Content>
-        <PanelGroup accordian="true" defaultActiveKey={0} bordered>
+        <PanelGroup accordian defaultActiveKey={0} bordered>
           {books.map((book, i) => {
             const {
               title,

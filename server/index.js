@@ -10,6 +10,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(router);
+// If no API routes are hit, send the React app
+const root = require("path").join(__dirname, "client", "build");
+app.use(express.static(root));
+app.get("*", (req, res) => {
+  res.sendFile("index.html", { root });
+});
 
 const server = http.createServer(app);
 const io = require("socket.io")(server);

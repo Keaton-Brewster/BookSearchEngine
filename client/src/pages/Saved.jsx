@@ -9,6 +9,7 @@ const Saved = () => {
 
   useEffect(() => {
     API.getBooks().then((books) => {
+      console.log(books);
       setBooks(books);
     });
   }, []);
@@ -30,7 +31,7 @@ const Saved = () => {
                       description,
                       categories,
                       imageLinks,
-                    } = book.volumeInfo;
+                    } = book;
                     return (
                       <Panel
                         eventKey={i}

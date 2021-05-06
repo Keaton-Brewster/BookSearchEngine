@@ -4,7 +4,7 @@ const db = require("../../models");
 
 router.get("/books", (request, response) => {
   try {
-    db.Book.find().then((books) => {
+    db.Book.find({}).then((books) => {
       response.json(books);
     });
   } catch (error) {

@@ -1,7 +1,11 @@
 import React from "react";
+import useGetBooks from "../utils/useGetBooks";
+
 import { Navbar, Nav } from "rsuite";
 
 function NavBar({ time }) {
+  useGetBooks();
+
   return (
     <Navbar>
       <Navbar.Body>

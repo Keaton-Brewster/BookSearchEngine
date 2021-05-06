@@ -37,7 +37,7 @@ const getApiAndEmit = (socket) => {
 };
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://127.0.0.1/database",
+  process.env.MONGODB_URI || "mongodb://127.0.0.1/book_search_engine",
   {
     useNewUrlParser: true,
     useFindAndModify: true,

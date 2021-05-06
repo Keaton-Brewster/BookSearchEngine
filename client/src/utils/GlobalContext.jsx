@@ -2,8 +2,24 @@ import React, { createContext, useReducer } from "react";
 
 const initialState = {
   savedBooks: [],
+  update: 0,
 };
-function Reducer(state, action) {}
+function Reducer(state, action) {
+  switch (action.type) {
+    case "update saved books":
+      return {
+        ...state,
+        update: (state.update += 1),
+      };
+    default:
+    case "set saved books":
+      return {
+        ...state,
+        savedBooks: action.payload,
+      };
+      throw new Error();
+  }
+}
 
 const Store = ({ children }) => {
   const [store, dispatch] = useReducer(Reducer, initialState);

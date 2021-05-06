@@ -1,5 +1,4 @@
 {
-  "homepage": "https://google-book-search-kb.herokuapp.com/",
   "name": "booksearch",
   "version": "0.1.0",
   "private": true,

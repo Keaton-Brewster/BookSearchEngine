@@ -6,9 +6,10 @@ const useGetBooks = () => {
   const [store, dispatch] = useContext(StoreContext);
 
   useEffect(() => {
-    const savedBooks = API.getBooks();
-    dispatch({ action: "set saved books", payload: savedBooks });
-  }, [store.update]);
+    API.getBooks().then((savedBooks) => {
+      dispatch({ type: "set saved books", payload: savedBooks.data });
+    });
+  }, [store.update, dispatch]);
 };
 
 export default useGetBooks;

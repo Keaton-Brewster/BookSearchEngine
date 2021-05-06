@@ -11,12 +11,12 @@ function Reducer(state, action) {
         ...state,
         update: (state.update += 1),
       };
-    default:
     case "set saved books":
       return {
         ...state,
         savedBooks: action.payload,
       };
+    default:
       throw new Error();
   }
 }

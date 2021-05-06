@@ -15,7 +15,7 @@ const SearchResults = ({ books }) => {
       title: book?.volumeInfo?.title,
       authors: book?.volumeInfo?.authors,
       description: book?.volumeInfo?.description,
-      image: book?.volumeInfo?.imageLinks?.smallThumbnail,
+      imageLinks: book?.volumeInfo?.imageLinks,
       categories: book?.volumeInfo?.categories,
     };
 

@@ -1,10 +1,11 @@
 import React from "react";
 import { Container, Content, Sidebar, Footer } from "rsuite";
+import "./book.css";
 
 const Book = ({ imgLink, authors, categories, description }) => {
   return (
     <Container>
-      <Sidebar>
+      <Sidebar className="sidebar">
         <img src={imgLink} alt="" />
       </Sidebar>
       <Container>

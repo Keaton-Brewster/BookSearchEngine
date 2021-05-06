@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { Container, Content, PanelGroup, Panel } from "rsuite";
+import React, { useContext } from "react";
+import { StoreContext } from "../utils/GlobalContext";
+import { Container, Content, PanelGroup, Panel, Alert } from "rsuite";
+import DeleteButton from "../components/DeleteBtn";
 import Book from "../components/Book";
 import { Row, Col } from "../components/Grid";
 import API from "../utils/API";
 
 const Saved = () => {
-  const [books, setBooks] = useState([]);
+  const [store, dispatch] = useContext(StoreContext);
+  const books = store.savedBooks;
+  console.log(store);
 
-  useEffect(() => {
-    API.getBooks().then((books) => {
-      console.log(books);
-      setBooks(books);
+  function deleteBook(_id) {
+    API.deleteBook(_id).then(() => {
+      dispatch({ type: "update saved books" });
+      Alert.error("Deleted");
     });
-  }, []);
+  }
 
   return (
     <Container fluid>
@@ -21,10 +25,10 @@ const Saved = () => {
         <Col size="md-8">
           <h1>Saved</h1>
           <Container>
-            <Content>
-              <PanelGroup accordian defaultActiveKey={0} bordered>
-                {books.length > 0 ? (
-                  books.map((book, i) => {
+            {books.length > 0 ? (
+              <Content>
+                <PanelGroup accordian defaultActiveKey={0} bordered>
+                  {books.map((book, i) => {
                     const {
                       title,
                       authors,
@@ -46,6 +50,12 @@ const Saved = () => {
                             >
                               {title}
                             </h3>
+                            <DeleteButton
+                              handleBookDelete={(event) => {
+                                event.preventDefault();
+                                deleteBook(book._id);
+                              }}
+                            />
                           </>
                         }
                       >
@@ -57,12 +67,12 @@ const Saved = () => {
                         />
                       </Panel>
                     );
-                  })
-                ) : (
-                  <p>No results</p>
-                )}
-              </PanelGroup>
-            </Content>
+                  })}
+                </PanelGroup>
+              </Content>
+            ) : (
+              <Container>Start by saving from your search results</Container>
+            )}
           </Container>
         </Col>
         <Col size="md-2" />

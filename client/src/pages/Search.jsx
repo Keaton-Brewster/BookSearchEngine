@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import {} from "rsuite";
+import { useState, useEffect } from "react";
+import { Container } from "rsuite";
 import SearchResults from "../components/SearchResults";
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row } from "../components/Grid";
 import { Input } from "../components/Form";
 import axios from "axios";
 
@@ -23,7 +23,7 @@ function Books() {
           setBooks([]);
           console.warn(e);
         });
-    }, 1000);
+    }, 100);
 
     return () => {
       setBooks([]);
@@ -49,7 +49,11 @@ function Books() {
               placeholder="Search for books!"
             />
           </form>
-          <SearchResults books={books} />
+          {search ? (
+            <SearchResults books={books} />
+          ) : (
+            <Container>Type in the box to get started!</Container>
+          )}
         </Col>
         <Col size="md-2" />
       </Row>

@@ -9,7 +9,6 @@ import API from "../utils/API";
 const Saved = () => {
   const [store, dispatch] = useContext(StoreContext);
   const books = store.savedBooks;
-  console.log(store);
 
   function deleteBook(_id) {
     API.deleteBook(_id).then(() => {
@@ -27,7 +26,7 @@ const Saved = () => {
           <Container>
             {books.length > 0 ? (
               <Content>
-                <PanelGroup accordian defaultActiveKey={0} bordered>
+                <PanelGroup accordian bordered>
                   {books.map((book, i) => {
                     const {
                       title,
@@ -35,10 +34,10 @@ const Saved = () => {
                       description,
                       categories,
                       imageLinks,
+                      link,
                     } = book;
                     return (
                       <Panel
-                        eventKey={i}
                         key={i}
                         header={
                           <>
@@ -48,7 +47,9 @@ const Saved = () => {
                                 textOverflow: "ellipsis",
                               }}
                             >
-                              {title}
+                              <a href={link} target="blank">
+                                {title}
+                              </a>
                             </h3>
                             <DeleteButton
                               handleBookDelete={(event) => {

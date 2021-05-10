@@ -3,7 +3,7 @@ import useGetBooks from "../utils/useGetBooks";
 
 import { Navbar, Nav } from "rsuite";
 
-function NavBar({ time }) {
+function NavBar() {
   useGetBooks();
 
   return (
@@ -15,7 +15,6 @@ function NavBar({ time }) {
           </Nav.Item>
           <Nav.Item href="/search">Search</Nav.Item>
           <Nav.Item href="/saved">Saved</Nav.Item>
-          <Nav.Item>{time?.toLocaleString().substr(11, 8)}</Nav.Item>
         </Nav>
       </Navbar.Body>
     </Navbar>

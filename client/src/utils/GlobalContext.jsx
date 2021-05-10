@@ -4,6 +4,7 @@ const initialState = {
   savedBooks: [],
   update: 0,
 };
+
 function Reducer(state, action) {
   switch (action.type) {
     case "update saved books":

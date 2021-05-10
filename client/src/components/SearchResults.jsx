@@ -1,13 +1,11 @@
 import { useContext } from "react";
-import { StoreContext } from "../utils/GlobalContext";
 import { Container, Content, PanelGroup, Panel, Alert } from "rsuite";
+import { StoreContext } from "../utils/GlobalContext";
 import Book from "./Book";
 import SaveButton from "./SaveButton";
 import API from "../utils/API";
 
-import React from "react";
-
-const SearchResults = ({ books }) => {
+const SearchResults = ({ socket, books }) => {
   const [store, dispatch] = useContext(StoreContext);
 
   function handleBookSave(book) {
@@ -17,11 +15,11 @@ const SearchResults = ({ books }) => {
       description: book?.volumeInfo?.description,
       imageLinks: book?.volumeInfo?.imageLinks,
       categories: book?.volumeInfo?.categories,
+      link: book?.volumeInfo?.infoLink,
     };
 
     API.saveBook(bookData)
       .then(() => {
-        dispatch({ type: "update saved books" });
         Alert.success("Saved!");
       })
       .catch((error) => {
@@ -33,7 +31,7 @@ const SearchResults = ({ books }) => {
   return (
     <Container>
       <Content>
-        <PanelGroup accordian defaultActiveKey={0} bordered>
+        <PanelGroup bordered>
           {books.map((book, i) => {
             const {
               title,
@@ -41,17 +39,19 @@ const SearchResults = ({ books }) => {
               description,
               categories,
               imageLinks,
+              infoLink,
             } = book.volumeInfo;
             return (
               <Panel
-                eventKey={i}
                 key={i}
                 header={
                   <>
                     <h3
                       style={{ overflow: "hidden", textOverflow: "ellipsis" }}
                     >
-                      {title}
+                      <a href={infoLink} target="blank">
+                        {title}
+                      </a>
                     </h3>
                     <SaveButton
                       handleBookSave={(event) => {

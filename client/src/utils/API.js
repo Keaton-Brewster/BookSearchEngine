@@ -17,6 +17,9 @@ const API = {
   saveBook: function (bookData) {
     return axios.post("/api/books", bookData);
   },
+  emit: (bookData) => {
+    return axios.post("/api/emit_socket", { bookData });
+  },
 };
 
 export default API;

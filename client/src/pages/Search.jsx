@@ -5,7 +5,7 @@ import { Col, Row } from "../components/Grid";
 import { Input } from "../components/Form";
 import axios from "axios";
 
-function Books() {
+function Search({ socket }) {
   // Initialize books as an empty array
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
@@ -13,7 +13,7 @@ function Books() {
   useEffect(() => {
     if (!search) return;
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       axios
         .get(`https://www.googleapis.com/books/v1/volumes?q=${search}`)
         .then((res) => {
@@ -25,9 +25,7 @@ function Books() {
         });
     }, 100);
 
-    return () => {
-      setBooks([]);
-    };
+    return () => clearTimeout(timeout);
   }, [search]);
 
   const handleInputChange = (event) => {
@@ -50,7 +48,7 @@ function Books() {
             />
           </form>
           {search ? (
-            <SearchResults books={books} />
+            <SearchResults socket={socket} books={books} />
           ) : (
             <Container>Type in the box to get started!</Container>
           )}
@@ -61,4 +59,4 @@ function Books() {
   );
 }
 
-export default Books;
+export default Search;

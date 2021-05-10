@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { Container, Content, PanelGroup, Panel, Alert } from "rsuite";
 import { StoreContext } from "../utils/GlobalContext";
+import useFilter from "../utils/useFilter";
 import Book from "./Book";
 import SaveButton from "./SaveButton";
 import API from "../utils/API";
 
-const SearchResults = ({ socket, books }) => {
+const SearchResults = ({ books }) => {
   const [store, dispatch] = useContext(StoreContext);
 
   function handleBookSave(book) {
@@ -16,10 +17,12 @@ const SearchResults = ({ socket, books }) => {
       imageLinks: book?.volumeInfo?.imageLinks,
       categories: book?.volumeInfo?.categories,
       link: book?.volumeInfo?.infoLink,
+      id: book?.id,
     };
 
     API.saveBook(bookData)
       .then(() => {
+        dispatch({ type: "update saved books" });
         Alert.success("Saved!");
       })
       .catch((error) => {
@@ -32,7 +35,7 @@ const SearchResults = ({ socket, books }) => {
     <Container>
       <Content>
         <PanelGroup bordered>
-          {books.map((book, i) => {
+          {useFilter(books).map((book, i) => {
             const {
               title,
               authors,

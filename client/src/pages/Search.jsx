@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Container } from "rsuite";
+import { StoreContext } from "../utils/GlobalContext";
 import SearchResults from "../components/SearchResults";
 import { Col, Row } from "../components/Grid";
 import { Input } from "../components/Form";
@@ -7,6 +8,7 @@ import axios from "axios";
 
 function Search({ socket }) {
   // Initialize books as an empty array
+  const [store, dispatch] = useContext(StoreContext);
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
 
